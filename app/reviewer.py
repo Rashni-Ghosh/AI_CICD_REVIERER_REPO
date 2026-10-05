@@ -87,34 +87,78 @@ def review_code(file_path):
     # 3. AI review
     # --------------------------------
 
+
     prompt = f"""
-Analyze this Python code.
+You are an expert senior software engineer performing an automated
+code review for a CI/CD pipeline.
 
-Find ONLY these two issues:
+Your job is to identify REAL and ACTIONABLE issues in the provided source code.
 
-1. HTTPS requests without an explicit timeout.
-2. Bare exception handlers such as:
-   except:
+Focus on issues that require understanding the code's behavior, not just
+simple pattern matching.
 
-Do not report any other issue.
+Review the code for:
 
-Use the exact source-code line number.
+1. SECURITY
+   - Unsafe handling of user input
+   - Injection vulnerabilities
+   - Sensitive data exposure
+   - Unsafe file or command operations
+   - Authentication or authorization concerns
+   - Unsafe URL construction
+   - SSRF or similar risks
 
-Return ONLY valid JSON in this format:
+2. RELIABILITY
+   - Missing HTTP timeouts
+   - Missing error handling
+   - Missing HTTP status validation
+   - Possible runtime failures
+   - Unhandled exceptions
+   - Resource handling problems
+
+3. MAINTAINABILITY
+   - Poor or confusing implementation
+   - Unnecessary complexity
+   - Fragile code
+   - Important missing validation
+
+IMPORTANT RULES:
+
+- Only report issues that are actually relevant to this code.
+- Do not invent vulnerabilities.
+- Do not report style issues unless they have a meaningful engineering impact.
+- Do not report the same issue more than once.
+- Use the exact source-code line number where the issue occurs.
+- Prefer specific and actionable recommendations.
+- Think about how the code behaves at runtime.
+- Do not explain your reasoning outside the JSON response.
+
+The deterministic scanner has already identified the following issues: {deterministic_summary} 
+IMPORTANT RULES:
+- Do NOT report issues already identified at deterministic level.
+- Provide specific and actionable recommendations. 
+- Think about how the code behaves at runtime. 
+- Do not explain your reasoning outside the JSON response.
+
+Your MOST IMPORTANT job is to identify additional issues that require semantic understanding of the code.
+
+Return ONLY valid JSON.
+
+Required format:
 
 {{
     "findings": [
         {{
-            "severity": "MEDIUM",
-            "category": "Reliability",
-            "line": 10,
-            "issue": "HTTPS request does not specify a timeout.",
-            "recommendation": "Specify an explicit timeout."
+            "severity": "HIGH | MEDIUM | LOW",
+            "category": "Security | Reliability | Maintainability",
+            "line": 1,
+            "issue": "Short description of the actual problem.",
+            "recommendation": "Specific recommendation to fix the problem."
         }}
     ]
 }}
 
-If no issues are found, return:
+If there are no meaningful issues, return:
 
 {{
     "findings": []
@@ -126,11 +170,6 @@ SOURCE FILE:
 SOURCE CODE:
 {code}
 """
-
-    print("=" * 60)
-    print("PROMPT SENT TO OLLAMA")
-    print(prompt)
-    print("=" * 60)
 
     print("Sending code to Ollama...")
 
@@ -144,19 +183,18 @@ SOURCE CODE:
                     "content": prompt
                 }
             ],
-            "stream": False
+            "stream": False,
+            "format": "json",
+            "options": {
+                "temperature": 0.0, 
+            }
         },
-        timeout=120
+        timeout=300
     )
 
     response.raise_for_status()
 
     ai_review_text = response.json()["message"]["content"].strip()
-
-    print("=" * 60)
-    print("RAW OLLAMA RESPONSE")
-    print(ai_review_text)
-    print("=" * 60)
 
     print("Raw Ollama response:")
     print(ai_review_text)
@@ -185,8 +223,10 @@ SOURCE CODE:
 
         except json.JSONDecodeError:
 
+            print("WARNING: Ollama returned invalid JSON")
             ai_review = {
                 "findings": [],
+                "error": "AI response could not be parsed as JSON",
                 "raw_response": ai_review_text
             }
 

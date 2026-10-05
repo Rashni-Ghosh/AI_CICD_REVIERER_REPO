@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.reviewer import review_code, review_repository
+from app.reviewer import review_repository
 
 app = FastAPI(
     title="AI CI/CD Reviewer",
@@ -13,13 +13,13 @@ def root():
         "message": "AI CI/CD Reviewer is running"
     }
 
-# @app.post("/review")
-# def review():
-
-#     result = review_repository("test-data")
-
-#     return result
-
 @app.post("/review")
 def review():
-    return review_code("test-data/ai_test.py")
+
+    result = review_repository("test-data")
+
+    return result
+
+# @app.post("/review")
+# def review():
+#     return review_code("test-data/ai_test.py")
