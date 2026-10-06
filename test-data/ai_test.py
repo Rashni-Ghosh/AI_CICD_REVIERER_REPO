@@ -1,6 +1,6 @@
 import requests
 
-
+# Testing GitHub AI CI
 def get_user_data(user_id):
     url = "https://api.example.com/users/" + user_id
 
