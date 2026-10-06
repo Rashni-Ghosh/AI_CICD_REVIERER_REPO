@@ -82,12 +82,12 @@ def main():
                 f"{finding.get('issue')}"
             )
 
-        print("\n❌ AI Code Review FAILED")
+        print("\nAI Code Review FAILED")
         print("Blocking findings must be resolved before merging.")
 
         return 1
 
-    print("\n✅ AI Code Review PASSED")
+    print("\nAI Code Review PASSED")
     print("No blocking findings were found.")
 
     return 0
