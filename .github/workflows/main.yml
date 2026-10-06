@@ -24,9 +24,8 @@ jobs:
         run: python --version
 
       - name: Verify Ollama
-        shell: pwsh
         run: |
-          Invoke-RestMethod http://localhost:11434/api/tags
+          python -c "import urllib.request; print(urllib.request.urlopen('http://localhost:11434/api/tags').read().decode())"
 
       - name: Run AI Code Review
         run: |
