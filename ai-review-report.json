@@ -1,0 +1,270 @@
+{
+  "repository": "test-data",
+  "files_reviewed": 6,
+  "results": [
+    {
+      "file": "test-data\\ai_test.py",
+      "deterministic_findings": [],
+      "ai_review": {
+        "findings": [
+          {
+            "severity": "LOW",
+            "category": "Maintainability",
+            "line": 1,
+            "issue": "Unnecessary complexity in `calculate_average` function.",
+            "recommendation": "Simplify the `calculate_average` function by removing the `total` variable and directly calculating the sum."
+          }
+        ]
+      }
+    },
+    {
+      "file": "test-data\\application.py",
+      "deterministic_findings": [],
+      "ai_review": {
+        "findings": [
+          {
+            "severity": "HIGH",
+            "category": "Security",
+            "line": 10,
+            "issue": "Unsafe handling of user input in URL construction.",
+            "recommendation": "Validate and sanitize user input before constructing URLs."
+          },
+          {
+            "severity": "HIGH",
+            "category": "Security",
+            "line": 14,
+            "issue": "No error handling and no request timeout in HTTP requests.",
+            "recommendation": "Add error handling and set appropriate request timeouts."
+          },
+          {
+            "severity": "HIGH",
+            "category": "Security",
+            "line": 20,
+            "issue": "Sensitive data exposure in database URL.",
+            "recommendation": "Remove sensitive information from the database URL."
+          },
+          {
+            "severity": "HIGH",
+            "category": "Security",
+            "line": 24,
+            "issue": "No request timeout in HTTP requests.",
+            "recommendation": "Add request timeout to HTTP requests."
+          },
+          {
+            "severity": "HIGH",
+            "category": "Security",
+            "line": 30,
+            "issue": "No request timeout in HTTP requests.",
+            "recommendation": "Add request timeout to HTTP requests."
+          },
+          {
+            "severity": "HIGH",
+            "category": "Security",
+            "line": 34,
+            "issue": "No request timeout in HTTP requests.",
+            "recommendation": "Add request timeout to HTTP requests."
+          }
+        ]
+      }
+    },
+    {
+      "file": "test-data\\clean.py",
+      "deterministic_findings": [],
+      "ai_review": {
+        "findings": [
+          {
+            "severity": "LOW",
+            "category": "Maintainability",
+            "line": 1,
+            "issue": "Unnecessary import of `os` module.",
+            "recommendation": "Remove the import of `os` module if it is not used."
+          }
+        ]
+      }
+    },
+    {
+      "file": "test-data\\Dockerfile",
+      "deterministic_findings": [
+        {
+          "severity": "MEDIUM",
+          "category": "Docker",
+          "file": "test-data\\Dockerfile",
+          "line": 1,
+          "issue": "Docker image uses the latest tag.",
+          "recommendation": "Use explicit, trusted image versions and avoid unnecessary root privileges."
+        },
+        {
+          "severity": "MEDIUM",
+          "category": "Docker",
+          "file": "test-data\\Dockerfile",
+          "line": 4,
+          "issue": "Docker container explicitly runs as root.",
+          "recommendation": "Use explicit, trusted image versions and avoid unnecessary root privileges."
+        }
+      ],
+      "ai_review": {
+        "findings": [
+          {
+            "severity": "HIGH",
+            "category": "Security",
+            "line": 4,
+            "issue": "Docker container runs as root.",
+            "recommendation": "Run the container with a non-root user to reduce the risk of privilege escalation."
+          }
+        ]
+      }
+    },
+    {
+      "file": "test-data\\python.py",
+      "deterministic_findings": [
+        {
+          "severity": "HIGH",
+          "category": "Security",
+          "file": "test-data\\python.py",
+          "line": 5,
+          "issue": "Possible hard-coded secret detected.",
+          "recommendation": "Remove the secret from source code and use environment variables or a secret manager."
+        },
+        {
+          "severity": "HIGH",
+          "category": "Security",
+          "file": "test-data\\python.py",
+          "line": 8,
+          "issue": "Possible hard-coded secret detected.",
+          "recommendation": "Remove the secret from source code and use environment variables or a secret manager."
+        },
+        {
+          "severity": "HIGH",
+          "category": "Security",
+          "file": "test-data\\python.py",
+          "line": 11,
+          "issue": "Possible hard-coded secret detected.",
+          "recommendation": "Remove the secret from source code and use environment variables or a secret manager."
+        },
+        {
+          "severity": "HIGH",
+          "category": "Security",
+          "file": "test-data\\python.py",
+          "line": 15,
+          "issue": "Potentially dangerous command execution detected.",
+          "recommendation": "Avoid executing untrusted user input directly. Use safer command execution patterns and validate input."
+        },
+        {
+          "severity": "HIGH",
+          "category": "Security",
+          "file": "test-data\\python.py",
+          "line": 18,
+          "issue": "Potentially dangerous command execution detected.",
+          "recommendation": "Avoid executing untrusted user input directly. Use safer command execution patterns and validate input."
+        },
+        {
+          "severity": "HIGH",
+          "category": "Security",
+          "file": "test-data\\python.py",
+          "line": 22,
+          "issue": "Potentially dangerous command execution detected.",
+          "recommendation": "Avoid executing untrusted user input directly. Use safer command execution patterns and validate input."
+        },
+        {
+          "severity": "HIGH",
+          "category": "Security",
+          "file": "test-data\\python.py",
+          "line": 25,
+          "issue": "Potentially dangerous command execution detected.",
+          "recommendation": "Avoid executing untrusted user input directly. Use safer command execution patterns and validate input."
+        }
+      ],
+      "ai_review": {
+        "findings": [
+          {
+            "severity": "HIGH",
+            "category": "Security",
+            "line": 1,
+            "issue": "Hard-coded secret detected in password variable.",
+            "recommendation": "Remove or encrypt the hard-coded secret."
+          },
+          {
+            "severity": "HIGH",
+            "category": "Security",
+            "line": 8,
+            "issue": "Hard-coded secret detected in API key variable.",
+            "recommendation": "Remove or encrypt the hard-coded secret."
+          },
+          {
+            "severity": "HIGH",
+            "category": "Security",
+            "line": 11,
+            "issue": "Hard-coded secret detected in token variable.",
+            "recommendation": "Remove or encrypt the hard-coded secret."
+          },
+          {
+            "severity": "HIGH",
+            "category": "Security",
+            "line": 15,
+            "issue": "Potentially dangerous command execution detected using subprocess.run with shell=True.",
+            "recommendation": "Use subprocess.run with shell=False and pass the command as a list of arguments."
+          },
+          {
+            "severity": "HIGH",
+            "category": "Security",
+            "line": 18,
+            "issue": "Potentially dangerous command execution detected using os.system.",
+            "recommendation": "Use subprocess.run with shell=False and pass the command as a list of arguments."
+          },
+          {
+            "severity": "HIGH",
+            "category": "Security",
+            "line": 22,
+            "issue": "Potentially dangerous command execution detected using subprocess.run with shell=True.",
+            "recommendation": "Use subprocess.run with shell=False and pass the command as a list of arguments."
+          },
+          {
+            "severity": "HIGH",
+            "category": "Security",
+            "line": 25,
+            "issue": "Potentially dangerous command execution detected using subprocess.run with shell=True.",
+            "recommendation": "Use subprocess.run with shell=False and pass the command as a list of arguments."
+          },
+          {
+            "severity": "HIGH",
+            "category": "Security",
+            "line": 28,
+            "issue": "Dangerous eval function used to execute user input.",
+            "recommendation": "Use a safer alternative like ast.literal_eval for safe evaluation of user input."
+          },
+          {
+            "severity": "HIGH",
+            "category": "Security",
+            "line": 31,
+            "issue": "Dangerous exec function used to execute user input.",
+            "recommendation": "Use a safer alternative like ast.literal_eval for safe evaluation of user input."
+          }
+        ]
+      }
+    },
+    {
+      "file": "test-data\\workflow.yaml",
+      "deterministic_findings": [
+        {
+          "severity": "MEDIUM",
+          "category": "CI/CD",
+          "file": "test-data\\workflow.yaml",
+          "line": 12,
+          "issue": "Action permission needs to be checked. It could be too permissive.",
+          "recommendation": "Pin CI/CD actions to a trusted version or commit SHA where appropriate."
+        },
+        {
+          "severity": "MEDIUM",
+          "category": "CI/CD",
+          "file": "test-data\\workflow.yaml",
+          "line": 16,
+          "issue": "CI/CD action references a mutable branch.",
+          "recommendation": "Pin CI/CD actions to a trusted version or commit SHA where appropriate."
+        }
+      ],
+      "ai_review": {
+        "findings": []
+      }
+    }
+  ]
+}
