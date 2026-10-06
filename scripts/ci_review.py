@@ -7,7 +7,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
 from app.reviewer import review_repository
-
+#this changes is for testing the github actions and ollama integration
 
 # POC policy:
 # MEDIUM and HIGH findings will block the CI pipeline.
