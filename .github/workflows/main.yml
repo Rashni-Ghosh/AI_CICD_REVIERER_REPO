@@ -14,11 +14,15 @@ jobs:
     runs-on: [self-hosted, windows, x64]
 
     steps:
-
       - name: Checkout repository
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
+
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
 
       - name: Verify Python
         run: python --version
