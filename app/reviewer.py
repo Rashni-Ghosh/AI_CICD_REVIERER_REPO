@@ -11,7 +11,7 @@ from app.checks import (
 from app.scanner import scan_repository
 
 
-OLLAMA_URL = "http://localhost:11434/api/chat"
+OLLAMA_URL = "http://192.168.0.104:11434/api/chat"
 MODEL = "qwen2.5-coder:3b"
 
 
