@@ -194,7 +194,7 @@ SOURCE CODE:
 
     response.raise_for_status()
 
-    ai_review_text = response.json()["message"]["content"].strip()
+    ai_review_text = response.json()["response"].strip()
 
     print("Raw Ollama response:")
     print(ai_review_text)
