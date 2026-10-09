@@ -12,7 +12,7 @@ from app.scanner import scan_repository
 
 
 OLLAMA_URL = "http://192.168.0.104:11434/api/generate"
-MODEL = "qwen2.5-coder:3b"
+MODEL = "qwen2.5:3b"
 
 
 def review_code(file_path):
