@@ -1,6 +1,6 @@
 import requests
 
-
+#Adding a comment to test the AI model's ability to generate code based on context.
 def get_user_data(user_id):
     url = "https://api.example.com/users/" + user_id
 
